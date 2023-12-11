@@ -93,7 +93,7 @@ Your task is to write JavaScript code that analyzes the records to calculate eac
 */
 
 console.log("Financial Analysis");
-console.log("------------------");
+console.log("------------------------------------------------------------");
 
 // Task 1 - The total number of months included in the dataset.
 console.log(`Total Months: ${finances.length}`);
@@ -109,7 +109,7 @@ for (var i = 0; i < finances.length; i++) {
 }
 
 // Output the net total
-console.log(`Total: $${netTotal.toLocaleString()}`); 
+console.log(`Total: £${netTotal.toLocaleString()}`); 
 
 
 // Task 3 - The average of the **changes** in Profit/Losses over the entire period.
@@ -130,7 +130,7 @@ for (var i = 1; i < finances.length; i++) {
 averageChange = totalAmount / numOfChanges;
 
 // Output the average change
-console.log(`Average Change: $ ${averageChange.toLocaleString(undefined, { maximumFractionDigits: 2 })}`);
+console.log(`Average Change: £${averageChange.toLocaleString(undefined, { maximumFractionDigits: 2 })}`);
 
 
 
@@ -140,7 +140,45 @@ You will need to track what the total change in Profit/Losses are from month to 
 */
 
 // Task 4 - The greatest increase in Profit/Losses (date and amount) over the entire period.
-console.log(`Greatest Increase in Profits/Losses: `);
+
+// Initialize variables to store the greatest increase and its corresponding date
+var greatestIncrease = 0; // To store the most increased amount
+var greatestIncreaseDate = ""; // To store when the increase happen
+
+// For Loop to iterate through the Array
+for (var i = 1; i < finances.length; i++) {  
+  var change = finances[i][1] - finances[i - 1][1]; // Change between consecutive months
+
+  // Check if the current change is greater than the stored value
+  if (change > greatestIncrease) {
+    greatestIncrease = change;
+    greatestIncreaseDate = finances[i][0]; // Store the date of the greatest increase
+  }
+}
+
+// Output the Greatest Increase
+console.log(`Greatest Increase in Profits/Losses: ${greatestIncreaseDate} \(£${greatestIncrease.toLocaleString()})`);
+
 
 // Task 5 - The greatest decrease in Profit/Losses (date and amount) over the entire period.
-console.log(`Greatest Decrease in Profits/Losses: `);
+
+// Initialize variables to store the greatest decrease and its corresponding date
+var greatestDecrease = 0; // To store the most decreased amount
+var greatestDecreaseDate = ""; // To store when the decrease happen
+
+// For Loop to iterate through the Array
+for (var i = 1; i < finances.length; i++) {
+  // Calculate the change between consecutive months
+  var change = finances[i][1] - finances[i - 1][1];
+
+  // Check if the current change is less than the stored value
+  if (change < greatestDecrease) {
+    greatestDecrease = change;
+    greatestDecreaseDate = finances[i][0]; // Store the date of the greatest decrease
+  }
+}
+
+// Output the Greatest Decrease
+console.log(`Greatest Decrease in Profits/Losses: ${greatestDecreaseDate} \(£${greatestDecrease.toLocaleString()})`);
+
+console.log("------------------------------------------------------------");
