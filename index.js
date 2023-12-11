@@ -92,16 +92,55 @@ You have been given a dataset composed of arrays with two fields, Date and Profi
 Your task is to write JavaScript code that analyzes the records to calculate each of the following:
 */
 
-// The total number of months included in the dataset.
+console.log("Financial Analysis");
+console.log("------------------");
+
+// Task 1 - The total number of months included in the dataset.
+console.log(`Total Months: ${finances.length}`);
+
+
+// Task 2 - The net total amount of Profit/Losses over the entire period.
+var netTotal = 0; // Variable to store net profit
+
+// For Loop to iterate through the Array
+for (var i = 0; i < finances.length; i++) {
+  // Access the Profit/Loss of each inner array and add it to the netTotal
+  netTotal += finances[i][1];
+}
+
+// Output the net total
+console.log(`Total: $${netTotal.toLocaleString()}`); 
+
+
+// Task 3 - The average of the **changes** in Profit/Losses over the entire period.
+
+var totalAmount = 0; // To store the total amount of changes
+var numOfChanges = 0; // To store the number of changes made
+var averageChange = 0; // To store the average change value
+
+// For Loop to iterate through the Array
+for (var i = 1; i < finances.length; i++) {
+  var difference = 0;
+  difference = finances[i][1] - finances[i - 1][1]; // Current Month - Previous Month
+  totalAmount += difference;
+  numOfChanges++; // Keep track of how many changes to calculate average
+}
+
+// Calculate the average change
+averageChange = totalAmount / numOfChanges;
+
+// Output the average change
+console.log(`Average Change: $ ${averageChange.toLocaleString(undefined, { maximumFractionDigits: 2 })}`);
 
 
 
-// * The net total amount of Profit/Losses over the entire period.
+/* 
+You will need to track what the total change in Profit/Losses are from month to month and then find the average.
+(`Total/(Number of months - 1)`)
+*/
 
-// * The average of the **changes** in Profit/Losses over the entire period.
-//   * You will need to track what the total change in Profit/Losses are from month to month and then find the average.
-//   * (`Total/(Number of months - 1)`)
+// Task 4 - The greatest increase in Profit/Losses (date and amount) over the entire period.
+console.log(`Greatest Increase in Profits/Losses: `);
 
-// * The greatest increase in Profit/Losses (date and amount) over the entire period.
-
-// * The greatest decrease in Profit/Losses (date and amount) over the entire period.
+// Task 5 - The greatest decrease in Profit/Losses (date and amount) over the entire period.
+console.log(`Greatest Decrease in Profits/Losses: `);
